@@ -1,0 +1,35 @@
+openapi: "3.0.0"
+
+servers:
+  - url: http://localhost:9090
+    description: Server For Test
+tags:
+  - name: Search Challenge 
+    description: Search Challenge By Level Or Description.
+paths:
+  /cardio/view/challenge/search:
+    post:
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                reference:
+                  type: string
+              # Both properties are required
+              required:  
+                - type
+                - reference
+      responses: 
+        '200':
+          description: Success!
+        '404':
+          description: Not Found!
+        '500':
+           description: System Error!
+
+      
