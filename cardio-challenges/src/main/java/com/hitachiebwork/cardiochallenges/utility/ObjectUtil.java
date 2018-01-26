@@ -1,10 +1,12 @@
+/*
+ * @Author Mohammad Rafaee Bin Suhai
+ * @CreatedDate 26/01/2018 * 
+ */
+
 package com.hitachiebwork.cardiochallenges.utility;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
-import java.text.NumberFormat;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ObjectUtil {
 
@@ -142,6 +144,23 @@ public class ObjectUtil {
 			return result != null ? result : null;
 		} else
 			return null;
+	}
+	
+	public static Boolean notNull(Object source) {
+		if (source != null) {
+			Boolean result = false;
+			
+			if (source instanceof String) {
+				result = !((String) source).isEmpty();
+			}else if (source instanceof Long) {
+				result = ((Long) source) > 0;
+			}else if (source instanceof Integer) {
+				result = ((Integer) source) > 0;
+			} 
+			
+			return result;
+		}else return false;
+			
 	}
 
 }

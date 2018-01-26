@@ -1,3 +1,8 @@
+/*
+ * @Author Mohammad Rafaee Bin Suhai
+ * @CreatedDate 26/01/2018 * 
+ */
+
 package com.hitachiebwork.cardiochallenges.controller;
 
 import org.slf4j.Logger;
@@ -9,6 +14,9 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.hitachiebwork.cardiochallenges.exception.ChallengesRuntimeException;
 import com.hitachiebwork.cardiochallenges.exception.ErrorForm;
+
+//This class purpose is to handle custome RuntimeException in json 
+//{status : false, message : '' , misc : map}
 
 public abstract class MainAbstractController {
 

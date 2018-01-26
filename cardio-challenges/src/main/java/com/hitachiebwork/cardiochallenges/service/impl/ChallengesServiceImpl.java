@@ -1,3 +1,8 @@
+/*
+ * @Author Mohammad Rafaee Bin Suhai
+ * @CreatedDate 26/01/2018 * 
+ */
+
 package com.hitachiebwork.cardiochallenges.service.impl;
 
 import java.util.Map;
@@ -25,6 +30,11 @@ public class ChallengesServiceImpl implements ChallengesService {
 	@Autowired
 	private ChallengesRepository challengeRepo;
 	
+//	This method only accept :
+//		- Type = Description --> Only accept reference in alphanumeric
+//		- Type = Level --> Only accept in numeric
+//		- Key null and Result null will produce Exception 
+	
 	@Override
 	public List<Map<String,Object>> getChallengesBySearchType(String type, Object reference) {
 		
@@ -32,7 +42,7 @@ public class ChallengesServiceImpl implements ChallengesService {
 		List<Map<String,Object>> mapList = new ArrayList<Map<String,Object>>();
 		Map<String,Object> map = null;
 		
-		if(type == null || reference == null)
+		if(!ObjectUtil.notNull(type) || !ObjectUtil.notNull(reference))
 			throw new ChallengesRuntimeException(false, "Search Component Is Undefined", null);
 		
 		if(ChallengesSearchType.DESCRIPTION.getName().equalsIgnoreCase(type)) {
