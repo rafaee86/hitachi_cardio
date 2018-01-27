@@ -1,0 +1,20 @@
+/*
+ * @Author Mohammad Rafaee Bin Suhai
+ * @CreatedDate 26/01/2018 * 
+ */
+
+package com.hitachiebworx.cardiochallenges.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.hitachiebworx.cardiochallenges.model.Challenges;
+
+@Repository
+public interface ChallengesRepository extends JpaRepository<Challenges, Long> {
+
+	public List<Challenges> findByDescriptionLikeIgnoreCase(String description);
+	public List<Challenges> findByLevelPkid(Long pkid);
+}
