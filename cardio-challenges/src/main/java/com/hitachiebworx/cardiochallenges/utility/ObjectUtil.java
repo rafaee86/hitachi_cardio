@@ -150,13 +150,7 @@ public class ObjectUtil {
 		if (source != null) {
 			Boolean result = false;
 			
-			if (source instanceof String) {
-				result = !((String) source).isEmpty();
-			}else if (source instanceof Long) {
-				result = ((Long) source) > 0;
-			}else if (source instanceof Integer) {
-				result = ((Integer) source) > 0;
-			} 
+			result = toString(source) != null;
 			
 			return result;
 		}else return false;

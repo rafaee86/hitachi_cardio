@@ -42,17 +42,20 @@ public class ChallengesServiceImpl implements ChallengesService {
 		List<Map<String,Object>> mapList = new ArrayList<Map<String,Object>>();
 		Map<String,Object> map = null;
 		
-		if(!ObjectUtil.notNull(type) || !ObjectUtil.notNull(reference))
+		if(!ObjectUtil.notNull(type) && !ObjectUtil.notNull(reference))
 			throw new ChallengesRuntimeException(false, "Search Component Is Undefined", null);
 		
-		if(ChallengesSearchType.DESCRIPTION.getName().equalsIgnoreCase(type)) {
-			if(!ObjectUtil.toString(reference).matches("^[a-zA-Z0-9]*$"))
-				throw new ChallengesRuntimeException(false, "Please Send Reference In AlphaNumeric For Type "+type, null);
-			challengesList = challengeRepo.findByDescriptionLikeIgnoreCase("%"+ObjectUtil.toString(reference)+"%");
-		}else if(ChallengesSearchType.LEVEL.getName().equalsIgnoreCase(type)) {
-			if(!ObjectUtil.toString(reference).matches("^[0-9]*$"))
-				throw new ChallengesRuntimeException(false, "Please Send Reference In Numeric For Type "+type, null);
-			challengesList = challengeRepo.findByLevelPkid(ObjectUtil.toLong(reference));
+		String str = ObjectUtil.toString(reference);
+		if(str != null) {
+			if(ChallengesSearchType.DESCRIPTION.getName().equalsIgnoreCase(type)) {
+				if(!str.matches("^[a-zA-Z0-9]*$"))
+					throw new ChallengesRuntimeException(false, "Please Send Reference In AlphaNumeric For Type "+type, null);
+				challengesList = challengeRepo.findByDescriptionLikeIgnoreCase("%"+str+"%");
+			}else if(ChallengesSearchType.LEVEL.getName().equalsIgnoreCase(type)) {
+				if(!str.matches("^[0-9]*$"))
+					throw new ChallengesRuntimeException(false, "Please Send Reference In Numeric For Type "+type, null);
+				challengesList = challengeRepo.findByLevelPkid(ObjectUtil.toLong(reference));
+			}
 		}
 		
 		if(challengesList == null || (challengesList != null && challengesList.isEmpty()))
